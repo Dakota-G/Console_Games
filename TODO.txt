@@ -10,4 +10,5 @@ Number games:
 Word games:
 - Trivia (capitals)
 
-Full-on console RPG? 
+Other:
+ - Console Text-RPG? 
