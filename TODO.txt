@@ -1,0 +1,13 @@
+Card-games:
+- BlackJack: Needs the dealer class to hide the first card and total value
+- Texas Hold'em
+- Memory
+
+
+Number games:
+- Sudoku
+
+Word games:
+- Trivia (capitals)
+
+Full-on console RPG? 
