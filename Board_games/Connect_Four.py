@@ -1,5 +1,3 @@
-# TODO: Need to add a board check to return a win or a draw
-
 
 board = [   ['::', '1','2','3','4','5'],
             ['5:','_','_','_','_','_',],
@@ -44,19 +42,49 @@ def print_board():
 
 def check_board(piece):
     global board
+    draw = True
     for x in range(1, 6):
 # Check rows
         if(
-        board[x][2] and board[x][3] and board[x][4] and board[x][5] == piece) or (
-        board[x][1] and board[x][2] and board[x][3] and board[x][4] == piece) or(
+        board[x][2] == piece and board[x][3] == piece and board[x][4] == piece and board[x][5] == piece) or (
+        board[x][1] == piece and board[x][2] == piece and board[x][3] == piece and board[x][4] == piece):
+            print_board()
+            print(f"{piece} wins on row {x}!")
+            return reset_game()
 # Check columns 
-        board[2][x] and board[3][x] and board[4][x] and board[5][x] == piece) or (
-        board[1][x] and board[2][x] and board[3][x] and board[4][x] == piece):
-            print(f"{piece} wins!")
-
+        elif(
+        board[2][x] == piece and board[3][x] == piece and board[4][x] == piece and board[5][x] == piece) or (
+        board[1][x] == piece and board[2][x] == piece and board[3][x] == piece and board[4][x] == piece):
+            print_board()
+            print(f"{piece} wins on column {x}!")
+            return reset_game()
 # Check diagonals
+    for x in range(1,3):
+        if (board[x][1] == piece and board[x+1][2] == piece and board[x+2][3] == piece and board[x+3][4] == piece) or (
+            board[x][2] == piece and board[x+1][3] == piece and board[x+2][4] == piece and board[x+3][5] == piece) or (
+            board[x][4] == piece and board[x+1][3] == piece and board[x+2][2] == piece and board[x+3][1] == piece) or (
+            board[x][5] == piece and board[x+1][4] == piece and board[x+2][3] == piece and board[x+3][2] == piece):
+                print_board()
+                print(f"{piece} wins on the diagonal!")
+                return reset_game()
+    for row in board:
+        for space in row:
+            if space == '_':
+                draw = False
+    if draw == True:
+        print_board()
+        print("Looks like a draw! Nobody wins!")
+        return reset_game()
 
-
+def reset_game():
+    input("Press Enter to play again!")
+    for x in range(1,6):
+        board[1][x] = '_'
+        board[2][x] = '_'
+        board[3][x] = '_'
+        board[4][x] = '_'
+        board[5][x] = '_'
+    start_game()
 
 def start_game():
     print("Let's play connect four!")
