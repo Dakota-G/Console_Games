@@ -1,27 +1,30 @@
-# Solves sudoku puzzles using recursive recall
-# This was discussed on Computerphile's youtube channel
+import random
 
-# sample sudoku problem
-grid =  [  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-            [6, 0, 0, 1, 9, 5, 0, 0, 0],
-            [0, 9, 8, 0, 0, 0, 0, 6, 0],
-            [8, 0, 0, 0, 6, 0, 0, 0, 3],
-            [4, 0, 0, 8, 0, 3, 0, 0, 1],
-            [7, 0, 0, 0, 2, 0, 0, 0, 6],
-            [0, 6, 0, 0, 0, 0, 2, 8, 0],
-            [0, 0, 0, 4, 1, 9, 0, 0, 5],
-            [0, 0, 0, 0, 8, 0, 0, 7, 9] ]
+# TODO:
+# Create a function to seed a 9x9 grid 
+# Use the SudokuSolver to solve that grid completely (this will ensure it is valid)
+# Remove spaces from the grid
+# Spaces removed determined by difficulty?
 
-# grid = [    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#             [0, 0, 0, 0, 0, 0, 0, 0, 0] ]
+def seed_grid():
+    global grid
+    grid =  [[],[],[],[],[],[],[],[],[]]
+    numbers = [1,2,3,4,5,6,7,8,9]
+    places = [0,1,2,3,4,5,6,7,8]
+    for row in grid:
+        insert = numbers.pop(random.randint(0, len(numbers)-1))
+        place = places.pop(random.randint(0, len(places)-1))
+        for x in range(9):
+            if x == place:
+                row.append(insert)
+            else:
+                row.append(0)
+    return solve_grid()
 
+def show_grid(x):
+    for i in x:
+        print(i)
+    
 def check_grid(y, x, number):
     global grid
 # This checks for number matches along each row
@@ -60,9 +63,15 @@ def solve_grid():
                         grid[y][x] = 0
                 return
     show_grid(grid)
+    return create_spaces()
 
-def show_grid(x):
-    for i in x:
-        print(i)
-
-solve_grid()
+def create_spaces():
+    global grid
+    for row in grid:
+        while row.count(0) < 6:
+            x = random.randint(0,8)
+            y = random.randint(0,8)
+            grid[y][x] = 0
+    return show_grid(grid)
+                
+seed_grid()
