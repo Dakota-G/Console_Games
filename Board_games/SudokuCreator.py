@@ -1,7 +1,7 @@
 import random
 
 # !!Global boolean 'solved' allows us to get out of the recursion, otherwise, the program will try to come up with every possible sudoku grid..
-# Spaces removed determined by difficulty?
+# TODO: Spaces removed determined by difficulty?
 
 def seed_grid():
     global grid

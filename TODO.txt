@@ -5,10 +5,10 @@ Card-games:
 
 
 Number games:
-- Sudoku
+- Sudoku - DONE
 
 Word games:
-- Trivia (capitals)
+- Trivia (capitals) - DONE
 
 Other:
  - Console Text-RPG? 
